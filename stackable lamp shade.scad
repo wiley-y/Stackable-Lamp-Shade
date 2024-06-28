@@ -1,23 +1,31 @@
 $fa = 1;
 $fs = 0.4;
 
-// Define Constants
+
+/* [Main Structure] */
 size = 20;
     move = size*0.7;
 height = 20;
 wallThickness = 0.8;
 
+/* [Cross Supports] */
+supportHeight = 1;
+supportWidth = 10;
+
+/* [Central Supports] */
+centralSupportRadius = 6;
+centralSupportSupportRadius = 1;
+centralHoleRadius = 3;
+
+/* [Slots] */
 slotDepth = 2;
 slotThickness = 1;
 
-centralSupportRadius = 6;
-supportHeight = 1;
-supportWidth = 10;
-centralHoleRadius = 3;
-
+/* [Dovetail Meshing] */
 dovetailThickness = 2;
-dovetailScale = 0.85;
-dovetailSquish = 0.6;
+dovetailScale = 0.85; // [0:0.01:1]
+dovetailSquish = 0.6; // [0:0.01:1]
+
 
 
 
@@ -107,6 +115,8 @@ difference() {  // create central support
     translate([0,0,-height]) cylinder(h=height*3, r=centralHoleRadius);
     scale(dovetailScale) Dovetail8();
     };
+    
+translate([0,0,(supportHeight/2)]) cylinder(h = supportHeight, r = (centralSupportRadius + centralSupportSupportRadius), center = true);
 };
 
 main();

@@ -4,6 +4,39 @@
         "New set 1": {
             "$fa": "1",
             "$fs": "0.40000000000000002"
+        },
+        "New set 2": {
+            "$fa": "1",
+            "$fs": "0.40000000000000002",
+            "centralHoleRadius": "5",
+            "centralSupportRadius": "4",
+            "dovetailScale": "0.84999999999999998",
+            "dovetailSquish": "0.59999999999999998",
+            "dovetailThickness": "2",
+            "height": "20",
+            "size": "20",
+            "slotDepth": "0",
+            "slotThickness": "1",
+            "supportHeight": "1",
+            "supportWidth": "10",
+            "wallThickness": "0.80000000000000004"
+        },
+        "New set 3": {
+            "$fa": "1",
+            "$fs": "0.40000000000000002",
+            "centralHoleRadius": "3",
+            "centralSupportRadius": "6",
+            "centralSupportSupportRadius": "10",
+            "dovetailScale": "0.84999999999999998",
+            "dovetailSquish": "0.60000000000000009",
+            "dovetailThickness": "2",
+            "height": "20",
+            "size": "20",
+            "slotDepth": "2",
+            "slotThickness": "1",
+            "supportHeight": "1",
+            "supportWidth": "10",
+            "wallThickness": "0.80000000000000004"
         }
     }
 }
