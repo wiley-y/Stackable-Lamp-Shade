@@ -2,9 +2,13 @@ $fa = 1;
 $fs = 0.4;
 
 
+/* [Basic Constants] */
+layerWidth = 0.8;
+layerHeight = 0.2;
+
 /* [Main Structure] */
-size = 20;
-    move = size*0.7;
+size = 180;
+    move = size * 0.7;
 height = 20;
 wallThickness = 0.8;
 
@@ -53,7 +57,7 @@ module MakeShape (radius) {
 module MakeShell(shellSize) {
     difference () {  // Create Shell
             scale([1,1,1]) MakeShape(size);
-            scale([1,1,2]) translate([0,0,-1]) MakeShape(shellSize - wallThickness);
+            scale([1,1,2]) translate([0,0,-1]) MakeShape(size - shellSize);
             };
 };
 
@@ -92,16 +96,23 @@ module CentralSupport() {
     };
 };
 
+module FirstLayerSupport() {
+    difference() {
+        MakeShell(layerWidth * 2);
+        translate([0,0,maxRadius + layerHeight]) cube(size = maxRadius * 2, center = true);
+    }
+}
+
 module main() {
     // Create Shell with slots
     difference() {
-        MakeShell(size);
+        MakeShell(wallThickness);
             
         color("red")  difference () {
             scale([1.0001,1.0001,1.0001]) translate([0,0,-0.001]) 
             intersection() { 
-                MakeShell(size-slotThickness); rotate([0,0,45]) 
-                MakeShell(size-slotThickness); 
+                MakeShell(slotThickness + 0.001); rotate([0,0,45]) 
+                MakeShell(slotThickness + 0.001); 
             };
             
             translate([0,0, height/2])
@@ -109,17 +120,22 @@ module main() {
         };
     };
     
-difference() {  // create central support
-    CentralSupport();
-    
-    translate([0,0,-height]) cylinder(h=height*3, r=centralHoleRadius);
-    scale(dovetailScale) Dovetail8();
-    };
-    
-translate([0,0,(supportHeight/2)]) cylinder(h = supportHeight, r = (centralSupportRadius + centralSupportSupportRadius), center = true);
+    difference() {  // create central support
+        CentralSupport();
+        
+        translate([0,0,-height]) cylinder(h=height*3, r=centralHoleRadius);
+        scale(dovetailScale) Dovetail8();
+        };
+        
+    translate([0,0,(supportHeight/2)]) cylinder(h = supportHeight, r = (centralSupportRadius + centralSupportSupportRadius), center = true);
+
+    // Make first layer support
+    FirstLayerSupport();
 };
 
 main();
+
+// FirstLayerSupport();
 
 // rotate(45) translate([0,0,height-slotDepth]) main();
 
